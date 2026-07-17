@@ -60,7 +60,7 @@ st.markdown("""
         text-align: center;
     }
     </style>
-""", unsafe_styled_html=True)
+""", unsafe_allow_html=True)  # <-- Fixed parameter here
 
 # Load the trained model safely
 @st.cache_resource
