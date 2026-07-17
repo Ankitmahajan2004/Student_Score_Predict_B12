@@ -2,65 +2,104 @@ import streamlit as st
 import pickle
 import numpy as np
 
-# Set up page configuration
+# Set up stunning dark dashboard page configuration
 st.set_page_config(
-    page_title="Student Performance Predictor",
-    page_icon="🎓",
+    page_title="Academic Intelligence Dashboard",
+    page_icon="⚡",
     layout="centered"
 )
 
-# Custom CSS for modern vertical layout, shadow effects, and color combinations
+# --- High-End Executive Dashboard Theme (CSS) ---
 st.markdown("""
     <style>
-    /* Main application background and font tweak */
+    /* Global Application Theme Override */
     .stApp {
-        background-color: #f8f9fa;
+        background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        color: #f8fafc;
     }
     
-    /* Title style adjustments */
-    h1 {
-        color: #1e3a8a !important; /* Deep Navy Blue */
-        font-weight: 700 !important;
+    /* Sleek Title Design */
+    .dashboard-title {
+        background: linear-gradient(90deg, #38bdf8, #818cf8);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-family: 'Inter', sans-serif;
+        font-weight: 800 !important;
+        font-size: 2.8rem !important;
         text-align: center;
         margin-bottom: 5px !important;
+        letter-spacing: -0.05em;
     }
     
-    .subtitle-text {
-        color: #4b5563; /* Slate Gray */
+    .dashboard-tagline {
+        color: #94a3b8;
         text-align: center;
-        margin-bottom: 30px;
+        margin-bottom: 40px;
         font-size: 1.1rem;
+        font-weight: 400;
     }
 
-    /* Card styling for the vertical layout blocks */
-    .feature-card {
-        background-color: #ffffff;
-        padding: 24px;
-        border-radius: 12px;
-        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -1px rgba(0, 0, 0, 0.04);
-        border: 1px solid #e5e7eb;
-        margin-bottom: 20px;
+    /* Glassmorphic Vertical Input Cards with Glow Shadows */
+    .dashboard-card {
+        background: rgba(30, 41, 59, 0.7);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        padding: 28px;
+        border-radius: 16px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3), 0 8px 10px -6px rgba(0, 0, 0, 0.3);
+        margin-bottom: 25px;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
     
-    .feature-card h3 {
-        color: #2563eb !important; /* Royal Blue */
+    .dashboard-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.5), 0 0 15px rgba(56, 189, 248, 0.15);
+        border: 1px solid rgba(56, 189, 248, 0.3);
+    }
+    
+    .dashboard-card h3 {
+        background: linear-gradient(90deg, #f1f5f9, #cbd5e1);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
         margin-top: 0 !important;
-        margin-bottom: 15px !important;
-        font-size: 1.25rem !important;
+        margin-bottom: 20px !important;
+        font-size: 1.35rem !important;
+        font-weight: 600 !important;
+        display: flex;
+        align-items: center;
+        gap: 10px;
     }
 
-    /* Result Card styling */
-    .result-card {
-        background-color: #f0fdf4; /* Very light mint/green */
-        padding: 20px;
-        border-radius: 12px;
-        border-left: 5px solid #16a34a; /* Vibrant Green border accent */
-        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
-        margin-top: 25px;
+    /* Streamlit Input Label Adjustments for Dark Mode Visibility */
+    label {
+        color: #cbd5e1 !important;
+        font-weight: 500 !important;
+    }
+
+    /* Futuristic Neon Result Card */
+    .neon-result-card {
+        background: radial-gradient(circle at top left, rgba(56, 189, 248, 0.15), rgba(15, 23, 42, 0.8));
+        padding: 30px;
+        border-radius: 16px;
+        border: 2px solid #38bdf8;
+        box-shadow: 0 0 25px rgba(56, 189, 248, 0.25), inset 0 0 15px rgba(56, 189, 248, 0.05);
+        margin-top: 30px;
         text-align: center;
+        animation: pulse 2s infinite alternate;
+    }
+    
+    .result-value {
+        font-size: 3.5rem !important;
+        font-weight: 900 !important;
+        background: linear-gradient(135deg, #38bdf8 0%, #06b6d4 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin: 10px 0 0 0;
+        text-shadow: 0 0 20px rgba(6, 182, 212, 0.4);
     }
     </style>
-""", unsafe_allow_html=True)  # <-- Fixed parameter from previous error
+""", unsafe_allow_html=True)
 
 # Load the trained model safely
 @st.cache_resource
@@ -75,67 +114,68 @@ except Exception as e:
     st.error(f"Error loading model.pkl: {e}")
     st.stop()
 
-# --- Title Header ---
-st.markdown("<h1>🎓 Student Performance Predictor</h1>", unsafe_allow_html=True)
-st.markdown("<p class='subtitle-text'>Input the metrics below to vertically analyze and estimate final performance index scores.</p>", unsafe_allow_html=True)
+# --- Dashboard Header ---
+st.markdown("<h1 class='dashboard-title'>⚡ A.I. Student Analytics Engine</h1>", unsafe_allow_html=True)
+st.markdown("<p class='dashboard-tagline'>Predictive Machine Learning Framework for Student Trajectory Performance [KNN-Regression v1.6.1]</p>", unsafe_allow_html=True)
 
-# --- Vertical Card 1: Time Allocations ---
-st.markdown('<div class="feature-card"><h3>🕒 Time Management</h3>', unsafe_allow_html=True)
+# --- Vertical Block 1: Habits & Routines ---
+st.markdown('<div class="dashboard-card"><h3>⏳ Lifestyle & Time Allocation</h3>', unsafe_allow_html=True)
 hours_studied = st.number_input(
-    "Study Hours per Week", 
+    "Weekly Study Allocation (Hours)", 
     min_value=0.0, 
     max_value=168.0, 
     value=10.0, 
     step=0.5,
-    help="Total number of hours spent studying per week."
+    help="Total logged hours dedicated strictly to self-study per week."
 )
 sleep_hours = st.number_input(
-    "Average Sleep Hours", 
+    "Diurnal Rest Cycle (Hours/Night)", 
     min_value=0.0, 
     max_value=24.0, 
     value=7.0, 
     step=0.5,
-    help="Average daily sleep hours."
+    help="Average sleep hours per 24-hour cycle."
 )
 st.markdown('</div>', unsafe_allow_html=True)
 
-# --- Vertical Card 2: Academic Standings ---
-st.markdown('<div class="feature-card"><h3>📈 Academic Metrics</h3>', unsafe_allow_html=True)
+# --- Vertical Block 2: Performance Vectors ---
+st.markdown('<div class="dashboard-card"><h3>📊 Institutional Performance Metrics</h3>', unsafe_allow_html=True)
 attendance_percent = st.slider(
-    "Attendance Rate (%)", 
+    "Classroom Attendance Rate (%)", 
     min_value=0.0, 
     max_value=100.0, 
     value=85.0, 
     step=1.0,
-    help="Overall class attendance percentage."
+    help="Verified presence metrics across all required learning modules."
 )
 previous_scores = st.number_input(
-    "Previous Exam Score", 
+    "Baseline Evaluation Index (Last Exam)", 
     min_value=0.0, 
     max_value=100.0, 
     value=70.0, 
     step=1.0,
-    help="The score achieved in the most recent examination."
+    help="The aggregate raw performance index scored during the prior evaluation window."
 )
 st.markdown('</div>', unsafe_allow_html=True)
 
-# --- Prediction Action ---
-if st.button("Predict Performance Index", type="primary", use_container_width=True):
-    # Prepare the input array in the exact order expected by the model
+# --- Dashboard Action Trigger ---
+st.markdown("<div style='margin-top: 10px;'></div>", unsafe_allow_html=True)
+if st.button("🚀 EXECUTE PREDICTIVE ENGINE", type="primary", use_container_width=True):
+    # Form input vectors
     features = np.array([[hours_studied, sleep_hours, attendance_percent, previous_scores]])
     
     try:
-        # Generate prediction
+        # Infer target variable from unpickled KNN Regressor model
         prediction = model.predict(features)[0]
         
-        # Display results cleanly inside the stylized green-bordered shadow card
+        # Display the sleek neon metric card
         st.markdown(f"""
-            <div class="result-card">
-                <span style="color: #16a34a; font-weight: 600; font-size: 1.1rem; display:block; margin-bottom: 8px;">Prediction Matrix Computed Successfully</span>
-                <span style="color: #1f2937; font-size: 0.95rem;">Estimated Performance Score</span>
-                <h2 style="color: #15803d; margin: 5px 0 0 0; font-size: 2.2rem; font-weight: 800;">{prediction:.2f}</h2>
+            <div class="neon-result-card">
+                <span style="color: #38bdf8; font-weight: 700; font-size: 0.9rem; letter-spacing: 0.15em; display:block; margin-bottom: 5px; text-transform: uppercase;">Inference Analytics Computed</span>
+                <span style="color: #94a3b8; font-size: 1.05rem; font-weight: 400;">Projected Student Performance Index</span>
+                <h1 class="result-value">{prediction:.2f}</h1>
             </div>
         """, unsafe_allow_html=True)
         
     except Exception as e:
-        st.error(f"An error occurred during prediction: {e}")
+        st.error(f"Execution core failure: {e}")
