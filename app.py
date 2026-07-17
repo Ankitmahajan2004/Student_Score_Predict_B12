@@ -198,11 +198,10 @@ with col_controls:
 # --- Dynamic Result Processing & Interactive Visual Rendering ---
 with col_display:
     if execute_inference:
-        # Array clean of leaky bracket strings
-        features = np.array([[hours_studied, sleep_hours, attendance_percent, previous_scores]])
+        features = np.array([[hours_studied, sleep_hours, attendance_percent, previous_scores]])[cite: 1]
         
         try:
-            prediction = model.predict(features)[0]
+            prediction = model.predict(features)[0][cite: 1]
             
             # Render Core Numeric Holographic View Box
             st.markdown(f"""
