@@ -9,7 +9,7 @@ st.set_page_config(
     layout="centered"
 )
 
-# --- Handmade Studio & Organic Aesthetic Theme (CSS) ---
+# --- Handmade Studio & Organic Celebration Theme (CSS) ---
 st.markdown("""
     <style>
     /* Premium off-white/cream textured background */
@@ -44,14 +44,12 @@ st.markdown("""
         border-radius: 14px;
         padding: 28px;
         margin-bottom: 25px;
-        /* Soft, warm ambient physical shadow */
         box-shadow: 
             0 10px 30px -15px rgba(139, 126, 116, 0.2),
             0 1px 3px rgba(0, 0, 0, 0.02);
         position: relative;
     }
     
-    /* Top accent line to feel like a high-end planner */
     .studio-card::before {
         content: '';
         position: absolute;
@@ -85,7 +83,7 @@ st.markdown("""
         color: #ffffff !important;
         border: 2px solid #b54a3a !important;
         padding: 12px 24px !important;
-        border-radius: 30px !important; /* Smooth pill shape */
+        border-radius: 30px !important;
         font-weight: 600 !important;
         font-size: 1.1rem !important;
         transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
@@ -113,8 +111,47 @@ st.markdown("""
         font-size: 4rem !important;
         font-weight: 800 !important;
         color: #2b5c47 !important; /* Deep Sage Green */
-        margin: 10px 0 0 0;
+        margin: 10px 0 15px 0;
         font-family: 'Playfair Display', Georgia, serif;
+    }
+
+    /* --- Animated CSS Celebration Candles Container --- */
+    .candle-container {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        margin-top: 20px;
+    }
+
+    .candle {
+        width: 15px;
+        height: 50px;
+        background: linear-gradient(to bottom, #e8c595, #c95a49);
+        border-radius: 4px 4px 0 0;
+        position: relative;
+    }
+
+    .flame {
+        width: 12px;
+        height: 20px;
+        background: radial-gradient(circle at bottom, #ffdf00, #ff5722);
+        border-radius: 50% 50% 20% 20%;
+        position: absolute;
+        top: -18px;
+        left: 1.5px;
+        animation: flicker 0.6s infinite alternate ease-in-out;
+        box-shadow: 0 0 10px rgba(255, 87, 34, 0.5);
+    }
+
+    /* Give candles staggered flickering effects */
+    .candle:nth-child(2) .flame { animation-delay: 0.1s; }
+    .candle:nth-child(3) .flame { animation-delay: 0.25s; }
+    .candle:nth-child(4) .flame { animation-delay: 0.15s; }
+    .candle:nth-child(5) .flame { animation-delay: 0.3s; }
+
+    @keyframes flicker {
+        0% { transform: scale(1) rotate(-1deg); opacity: 0.9; }
+        100% { transform: scale(1.15) rotate(1deg); opacity: 1; filter: drop-shadow(0 0 8px #ffdf00); }
     }
     </style>
 """, unsafe_allow_html=True)
@@ -185,12 +222,21 @@ if st.button("✨ Evaluate Student Trajectory", use_container_width=True):
         # Generate model prediction[cite: 1]
         prediction = model.predict(features)[0]
         
-        # Display the custom handmade scrapbook style output
+        # Display the custom handmade scrapbook style output + candle celebration block
         st.markdown(f"""
             <div class="handmade-output">
                 <span style="color: #7c756b; font-weight: 600; font-size: 0.95rem; display:block; margin-bottom: 5px;">✨ Evaluation Successfully Logged ✨</span>
                 <span style="color: #4a4741; font-size: 1.1rem; font-weight: 400;">Projected Performance Index</span>
                 <h1 class="output-value">{prediction:.2f}</h1>
+                
+                <!-- Celebration Candles Rendering Triggered Upon Result -->
+                <div class="candle-container">
+                    <div class="candle"><div class="flame"></div></div>
+                    <div class="candle"><div class="flame"></div></div>
+                    <div class="candle"><div class="flame"></div></div>
+                    <div class="candle"><div class="flame"></div></div>
+                    <div class="candle"><div class="flame"></div></div>
+                </div>
             </div>
         """, unsafe_allow_html=True)
         
