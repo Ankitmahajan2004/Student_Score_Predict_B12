@@ -3,124 +3,161 @@ import pickle
 import numpy as np
 import streamlit.components.v1 as components
 
-# Set up page configuration
+# Set up page configuration with full fluid dashboard viewport layout
 st.set_page_config(
-    page_title="The Performance Ledger",
-    page_icon="🎨",
-    layout="centered"
+    page_title="EduIntel Pro // Matrix Core",
+    page_icon="⚡",
+    layout="wide",
+    initial_sidebar_state="collapsed"
 )
 
-# --- Handmade Premium Gallery & Celebration Animations (CSS) ---
+# --- Elite Vercel / Linear / Stripe Premium Dark Theme Architecture ---
 st.markdown("""
     <style>
+    /* Global Viewport Resets & Deep Space Ambient Backgrounds */
     .stApp {
-        background-color: #f7f3ed;
-        color: #3d2621;
-        font-family: 'Quicksand', system-ui, sans-serif;
+        background: radial-gradient(circle at 50% 0%, #0c101b 0%, #030712 100%);
+        color: #f8fafc;
+        font-family: 'Inter', system-ui, -apple-system, sans-serif;
     }
     
-    .gallery-title {
-        font-family: 'Playfair Display', Georgia, serif;
-        color: #721c24 !important; /* Deep Burgundy Crimson */
-        font-weight: 700 !important;
-        font-size: 2.7rem !important;
+    /* Command Hub App Bar Header */
+    .app-header {
         text-align: center;
-        margin-bottom: 5px !important;
-    }
-    
-    .gallery-tagline {
-        color: #8c7672;
-        text-align: center;
-        font-style: italic;
-        font-size: 1.05rem;
         margin-bottom: 40px;
+        padding-top: 20px;
+    }
+    
+    .app-badge {
+        background: rgba(56, 189, 248, 0.1);
+        color: #38bdf8;
+        border: 1px solid rgba(56, 189, 248, 0.2);
+        padding: 5px 14px;
+        border-radius: 9999px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        display: inline-block;
+        margin-bottom: 15px;
+    }
+    
+    .app-title {
+        font-size: 3.2rem !important;
+        font-weight: 900 !important;
+        letter-spacing: -0.05em !important;
+        background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 50%, #38bdf8 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin: 0 !important;
+    }
+    
+    .app-tagline {
+        color: #64748b;
+        font-size: 1.1rem;
+        margin-top: 8px;
     }
 
-    .gallery-card {
-        background: #ffffff;
-        border: 1px solid #e3dcd3;
+    /* Stripe/Linear Style Micro-Bordered Input Containers */
+    .panel-box {
+        background: rgba(15, 23, 42, 0.4);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.05);
         border-radius: 16px;
         padding: 30px;
         margin-bottom: 25px;
-        box-shadow: 0 12px 24px -10px rgba(114, 28, 36, 0.12);
-        position: relative;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
+        transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     }
     
-    .gallery-card::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 4px;
-        background: #d4af37; /* Gold Trim */
-        border-radius: 16px 16px 0 0;
+    .panel-box:hover {
+        border-color: rgba(56, 189, 248, 0.3);
+        box-shadow: 0 0 30px rgba(56, 189, 248, 0.08);
+        transform: translateY(-2px);
     }
     
-    .gallery-card h3 {
-        color: #721c24 !important;
-        font-size: 1.25rem !important;
+    .panel-box h3 {
+        color: #f1f5f9 !important;
+        font-size: 1.2rem !important;
         font-weight: 600 !important;
         margin-top: 0 !important;
         margin-bottom: 20px !important;
+        display: flex;
+        align-items: center;
+        gap: 10px;
     }
 
+    /* Input Parameter Labels Styling */
     label {
-        color: #5c4541 !important;
+        color: #94a3b8 !important;
         font-weight: 600 !important;
+        font-size: 0.85rem !important;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
     }
     
+    /* Framer/Vercel Hyper-Tactile Button Frame */
     .stButton>button {
-        background: linear-gradient(135deg, #721c24 0%, #a93226 100%) !important;
-        color: #ffffff !important;
-        border: 1px solid #5c1218 !important;
+        background: #ffffff !important;
+        color: #030712 !important;
+        border: none !important;
         padding: 14px 28px !important;
-        border-radius: 30px !important;
-        font-weight: 600 !important;
+        border-radius: 12px !important;
+        font-weight: 700 !important;
         font-size: 1.1rem !important;
-        box-shadow: 0 4px 15px rgba(114, 28, 36, 0.25) !important;
+        letter-spacing: -0.01em !important;
+        box-shadow: 0 0 25px rgba(255, 255, 255, 0.1) !important;
+        transition: all 0.2s ease !important;
+    }
+    
+    .stButton>button:hover {
+        transform: scale(1.005);
+        box-shadow: 0 0 35px rgba(56, 189, 248, 0.4) !important;
+        background: #38bdf8 !important;
+        color: #030712 !important;
     }
 
-    .celebration-output {
-        background: #fffdfa;
-        border: 2px dashed #721c24;
+    /* Luxury Holographic Core Prediction Card */
+    .hologram-result {
+        background: linear-gradient(135deg, rgba(56, 189, 248, 0.08) 0%, rgba(15, 23, 42, 0.8) 100%);
+        border: 1px solid rgba(56, 189, 248, 0.4);
         border-radius: 20px;
         padding: 40px;
-        margin-top: 35px;
         text-align: center;
+        box-shadow: 0 20px 50px rgba(0,0,0,0.5), inset 0 0 20px rgba(56, 189, 248, 0.1);
+        position: relative;
     }
     
-    .output-score {
-        font-size: 4.2rem !important;
-        font-weight: 800 !important;
-        color: #b8860b !important;
-        font-family: 'Playfair Display', Georgia, serif;
-        margin: 10px 0 15px 0;
+    .score-display {
+        font-size: 5rem !important;
+        font-weight: 900 !important;
+        background: linear-gradient(135deg, #ffffff 30%, #38bdf8 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin: 10px 0;
+        filter: drop-shadow(0 0 20px rgba(56, 189, 248, 0.4));
     }
 
-    .festive-row {
+    /* --- Interactive Sparkler & Candle Celebration Elements --- */
+    .celebration-row {
         display: flex;
         justify-content: center;
-        align-items: flex-end;
-        gap: 25px;
+        gap: 20px;
         margin-top: 25px;
-        height: 70px;
     }
+    
+    .candle { width: 12px; height: 40px; background: linear-gradient(to bottom, #38bdf8, #030712); border-radius: 3px; position: relative; }
+    .flame { width: 8px; height: 16px; background: radial-gradient(circle at bottom, #fff, #38bdf8); border-radius: 50% 50% 20% 20%; position: absolute; top: -14px; left: 2px; animation: flicker 0.4s infinite alternate ease-in-out; }
+    .sparkler { width: 6px; height: 20px; background: #475569; position: relative; }
+    .spark { position: absolute; top: -10px; left: -7px; width: 20px; height: 20px; background: radial-gradient(circle, #fff, #38bdf8, transparent); border-radius: 50%; animation: burst 0.3s infinite alternate ease-in-out; }
 
-    .candle { width: 14px; height: 45px; background: linear-gradient(to bottom, #d4af37, #721c24); border-radius: 3px 3px 0 0; position: relative; }
-    .flame { width: 10px; height: 18px; background: radial-gradient(circle at bottom, #ffee55, #f39c12); border-radius: 50% 50% 20% 20%; position: absolute; top: -16px; left: 2px; animation: sway 0.5s infinite alternate ease-in-out; }
-    .firecracker { width: 8px; height: 24px; background: #c0392b; border-top: 3px solid #f1c40f; position: relative; }
-    .spark { position: absolute; top: -12px; left: -6px; width: 20px; height: 20px; background: radial-gradient(circle, #fff 10%, #ffeb3b 40%, transparent 70%); border-radius: 50%; animation: burst 0.4s infinite alternate ease-in-out; }
-
-    .festive-row div:nth-child(even) .flame { animation-delay: 0.15s; }
-    .festive-row div:nth-child(3) .spark { animation-delay: 0.2s; }
-
-    @keyframes sway { 0% { transform: scale(1) rotate(-2deg); } 100% { transform: scale(1.15) rotate(2deg); filter: drop-shadow(0 0 8px #f39c12); } }
-    @keyframes burst { 0% { transform: scale(0.6); opacity: 0.7; } 100% { transform: scale(1.4); opacity: 1; filter: drop-shadow(0 0 6px #ffeb3b); } }
+    @keyframes flicker { 0% { transform: scale(1); } 100% { transform: scale(1.2); filter: drop-shadow(0 0 8px #38bdf8); } }
+    @keyframes burst { 0% { transform: scale(0.7); } 100% { transform: scale(1.3); filter: drop-shadow(0 0 10px #ffffff); } }
     </style>
 """, unsafe_allow_html=True)
 
-# Load the model safely
+# Load the inference model safely
 @st.cache_resource
 def load_model():
     with open("model.pkl", "rb") as file:
@@ -130,159 +167,195 @@ def load_model():
 try:
     model = load_model()
 except Exception as e:
-    st.error(f"Error loading model: {e}")
+    st.error(f"Error loading model framework core: {e}")
     st.stop()
 
-# --- Title ---
-st.markdown("<h1 class='gallery-title'>📜 The Learning Ledger</h1>", unsafe_allow_html=True)
-st.markdown("<p class='gallery-tagline'>A classic artisanal workspace mapping predictive academic milestones.</p>", unsafe_allow_html=True)
+# --- Top Dashboard Command Hub Bar ---
+st.markdown("""
+    <div class='app-header'>
+        <span class='app-badge'>⚡ Enterprise Analytics Suite</span>
+        <h1 class='app-title'>EduIntel Core Framework</h1>
+        <p class='app-tagline'>Predictive Student Velocity, Attendance Mapping, and Modular Grade Analysis Engine</p>
+    </div>
+""", unsafe_allow_html=True)
 
-# --- Inputs ---
-st.markdown('<div class="gallery-card"><h3>📖 Behavioral Profiling</h3>', unsafe_allow_html=True)
-hours_studied = st.number_input("📚 Weekly Study Duration (Hours)", min_value=0.0, max_value=168.0, value=10.0, step=0.5)
-sleep_hours = st.number_input("😴 Daily Sleep Allocation (Hours/Night)", min_value=0.0, max_value=24.0, value=7.0, step=0.5)
-st.markdown('</div>', unsafe_allow_html=True)
+# --- Layout Matrix Isolation (Inputs vs Actions) ---
+col_controls, col_display = st.columns([1, 1.2], gap="large")
 
-st.markdown('<div class="gallery-card"><h3>📊 Performance Vectors</h3>', unsafe_allow_html=True)
-attendance_percent = st.slider("🏫 Classroom Attendance Ratio (%)", min_value=0.0, max_value=100.0, value=85.0, step=1.0)
-previous_scores = st.number_input("🥇 Prior Exam Baseline Score", min_value=0.0, max_value=100.0, value=70.0, step=1.0)
-st.markdown('</div>', unsafe_allow_html=True)
+with col_controls:
+    st.markdown('<div class="panel-box"><h3>🕒 Time Parameters & Allocation</h3>', unsafe_allow_html=True)
+    hours_studied = st.number_input("📚 Weekly Study Duration (Hours)", min_value=0.0, max_value=168.0, value=12.0, step=0.5)
+    sleep_hours = st.number_input("😴 Sleep Matrix Log (Hours/Night)", min_value=0.0, max_value=24.0, value=7.5, step=0.5)
+    st.markdown('</div>', unsafe_allow_html=True)
 
-# --- Trigger Optimization ---
-if st.button("✨ Run Matrix Evaluation", use_container_width=True):
-    features = np.array([[hours_studied, sleep_hours, attendance_percent, previous_scores]])[cite: 1]
+    st.markdown('<div class="panel-box"><h3>📊 Core Performance Thresholds</h3>', unsafe_allow_html=True)
+    attendance_percent = st.slider("🏫 Classroom Attendance Index (%)", min_value=0.0, max_value=100.0, value=88.0, step=1.0)
+    previous_scores = st.number_input("🥇 Baseline Assessment Index Score", min_value=0.0, max_value=100.0, value=76.0, step=1.0)
+    st.markdown('</div>', unsafe_allow_html=True)
     
-    try:
-        prediction = model.predict(features)[0][cite: 1]
+    execute_inference = st.button("🚀 EXECUTE INFERENCE MATRIX", use_container_width=True)
+
+# --- Dynamic Result Processing & Interactive Visual Rendering ---
+with col_display:
+    if execute_inference:
+        features = np.array([[hours_studied, sleep_hours, attendance_percent, previous_scores]])[cite: 1]
         
-        # 1. Output Scoring & Firecracker Effects
-        st.markdown(f"""
-            <div class="celebration-output">
-                <span style="color: #721c24; font-weight: 700; font-size: 0.95rem; display:block; margin-bottom: 5px; letter-spacing: 0.1em;">✨ EVALUATION VERIFIED SUCCESSFUL ✨</span>
-                <span style="color: #8c7672; font-size: 1.1rem;">Projected Evaluation Index</span>
-                <h1 class="output-score">{prediction:.2f}</h1>
-                <div class="festive-row">
-                    <div class="firecracker"><div class="spark"></div></div>
-                    <div class="candle"><div class="flame"></div></div>
-                    <div class="firecracker"><div class="spark"></div></div>
-                    <div class="candle"><div class="flame"></div></div>
-                    <div class="firecracker"><div class="spark"></div></div>
+        try:
+            prediction = model.predict(features)[0][cite: 1]
+            
+            # Render Core Numeric Holographic View Box
+            st.markdown(f"""
+                <div class="hologram-result">
+                    <span style="color: #38bdf8; font-weight: 700; font-size: 0.85rem; letter-spacing: 0.2em; display:block; text-transform: uppercase;">Inference Processing Verified</span>
+                    <span style="color: #64748b; font-size: 1.05rem;">Projected Target Performance Rating</span>
+                    <h1 class="score-display">{prediction:.2f}</h1>
+                    
+                    <div class="celebration-row">
+                        <div class="sparkler"><div class="spark"></div></div>
+                        <div class="candle"><div class="flame"></div></div>
+                        <div class="sparkler"><div class="spark"></div></div>
+                        <div class="candle"><div class="flame"></div></div>
+                        <div class="sparkler"><div class="spark"></div></div>
+                    </div>
                 </div>
+            """, unsafe_allow_html=True)
+            
+            # Render Premium Dynamic Notion-styled Diagnostic Alert Card
+            st.markdown(f"""
+                <div class="panel-box" style="margin-top:20px; border-left:4px solid #38bdf8; background:rgba(56, 189, 248, 0.02);">
+                    <h4 style="color:#38bdf8; margin:0 0 8px 0; font-size:0.95rem; text-transform:uppercase; letter-spacing:0.05em;">🔮 AI Diagnostic Insights</h4>
+                    <p style="color:#94a3b8; font-size:0.95rem; margin:0; line-height:1.5;">
+                        Student displays strong performance potential at <b>{prediction:.2f}</b>. 
+                        The target score correlation exhibits an optimal trajectory anchored by an attendance consistency index of <b>{attendance_percent}%</b>. 
+                        Recommendation: Maintain a study velocity above <b>{hours_studied} hours/week</b> to insulate scores from systemic variance.
+                    </p>
+                </div>
+            """, unsafe_allow_html=True)
+            
+            # Mount Interactive, Clean Custom Chart Suite via Embed Component
+            chart_canvas_html = f"""
+            <html>
+            <head>
+                <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+                <style>
+                    body {{ background: transparent; font-family: sans-serif; margin: 0; padding: 0; }}
+                    .chart-element {{ background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 16px; padding: 20px; margin-bottom: 20px; }}
+                    h5 {{ margin: 0 0 15px 0; color: #f1f5f9; text-align: center; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.05em; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 8px; }}
+                    .double-layout {{ display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }}
+                </style>
+            </head>
+            <body>
+                <!-- 1. Monthly Marks Trend Line Chart -->
+                <div class="chart-element">
+                    <h5>📈 Monthly Marks Trend Velocity</h5>
+                    <canvas id="lineChart" height="110"></canvas>
+                </div>
+
+                <div class="double-layout">
+                    <!-- 2. Subject Scores Bar Chart -->
+                    <div class="chart-element">
+                        <h5>📊 Subject-Wise Scores</h5>
+                        <canvas id="barChart"></canvas>
+                    </div>
+                    <!-- 3. Skill Radar Analysis Matrix -->
+                    <div class="chart-element">
+                        <h5>🕸️ Core Competency Skill Analysis</h5>
+                        <canvas id="radarChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="double-layout">
+                    <!-- 4. Grade Vector Pie Chart -->
+                    <div class="chart-element">
+                        <h5>🍕 Relative Grade Distribution</h5>
+                        <canvas id="pieChart"></canvas>
+                    </div>
+                    <!-- 5. Attendance Donut Tracking Matrix -->
+                    <div class="chart-element">
+                        <h5>🍩 Attendance Matrix Split</h5>
+                        <canvas id="donutChart"></canvas>
+                    </div>
+                </div>
+
+                <script>
+                    const baseOptions = {{
+                        responsive: true,
+                        animation: {{ duration: 1800, easing: 'easeOutExpo' }},
+                        plugins: {{ legend: {{ labels: {{ color: '#94a3b8', font: {{ family: 'system-ui' }} }} }} }},
+                        scales: {{
+                            x: {{ grid: {{ color: 'rgba(255,255,255,0.03)' }}, ticks: {{ color: '#64748b' }} }},
+                            y: {{ grid: {{ color: 'rgba(255,255,255,0.03)' }}, ticks: {{ color: '#64748b' }} }}
+                        }}
+                    }};
+                    
+                    const techPalette = ['#38bdf8', '#818cf8', '#34d399', '#fb7185', '#a78bfa'];
+
+                    // Line Chart Configuration
+                    new Chart(document.getElementById('lineChart'), {{
+                        type: 'line',
+                        data: {{
+                            labels: ['Cycle 1', 'Cycle 2', 'Cycle 3', 'Cycle 4', 'Term Capstone'],
+                            datasets: [{{ label: 'Performance Velocity Target', data: [62, 70, 67, {previous_scores}, {prediction}], borderColor: '#38bdf8', borderWidth: 3, pointBackgroundColor: '#ffffff', tension: 0.25, fill: false }}]
+                        }},
+                        options: baseOptions
+                    }});
+
+                    // Bar Chart Configuration
+                    new Chart(document.getElementById('barChart'), {{
+                        type: 'bar',
+                        data: {{
+                            labels: ['STEM', 'Lang', 'Arts', 'Hist'],
+                            datasets: [{{ label: 'Scores', data: [{previous_scores}, 84, 91, 73], backgroundColor: techPalette.slice(0,4), borderRadius: 6 }}]
+                        }},
+                        options: baseOptions
+                    }});
+
+                    // Radar Chart Configuration
+                    new Chart(document.getElementById('radarChart'), {{
+                        type: 'radar',
+                        data: {{
+                            labels: ['Logic', 'Focus', 'Retention', 'Velocity', 'Presence'],
+                            datasets: [{{ label: 'Metrics Spectrum', data: [85, {hours_studied * 7}, 75, 80, {attendance_percent}], backgroundColor: 'rgba(56, 189, 248, 0.1)', borderColor: '#38bdf8', borderWidth: 2 }}]
+                        }},
+                        options: {{ 
+                            responsive: true, 
+                            animation: {{ duration: 1800 }},
+                            scales: {{ r: {{ grid: {{ color: 'rgba(255,255,255,0.05)' }}, angleLines: {{ color: 'rgba(255,255,255,0.05)' }}, ticks: {{ display: false }}, pointLabels: {{ color: '#64748b' }} }} }}
+                        }}
+                    }});
+
+                    // Pie Chart Configuration
+                    new Chart(document.getElementById('pieChart'), {{
+                        type: 'pie',
+                        data: {{
+                            labels: ['Distinction', 'Merit', 'Pass'],
+                            datasets: [{{ data: [45, 35, 20], backgroundColor: ['#34d399', '#818cf8', '#fb7185'], borderStrokeColor: 'transparent' }}]
+                        }},
+                        options: {{ responsive: true, animation: {{ duration: 1800 }} }}
+                    }});
+
+                    // Donut Chart Configuration
+                    new Chart(document.getElementById('donutChart'), {{
+                        type: 'doughnut',
+                        data: {{
+                            labels: ['Present Rate', 'Absent Vector'],
+                            datasets: [{{ data: [{attendance_percent}, {100 - attendance_percent}], backgroundColor: ['#38bdf8', 'rgba(255,255,255,0.05)'], borderStrokeColor: 'transparent' }}]
+                        }},
+                        options: {{ responsive: true, animation: {{ duration: 1800 }}, cutout: '75%' }}
+                    }});
+                </script>
+            </body>
+            </html>
+            """
+            components.html(chart_canvas_html, height=880, scrolling=True)
+            
+        except Exception as e:
+            st.error(f"Execution matrix pipeline runtime fault: {e}")
+    else:
+        # Initial Placeholder display layout status before running evaluation index matrix
+        st.markdown("""
+            <div style="border: 2px dashed rgba(255,255,255,0.05); border-radius:16px; padding:80px 20px; text-align:center; color:#475569;">
+                <span style="font-size:2.5rem; display:block; margin-bottom:10px;">📊</span>
+                Awaiting Ingest Inputs. Click the Execute Button to populate real-time analytics data arrays.
             </div>
         """, unsafe_allow_html=True)
-        
-        # 2. Animated Chart Suite Embedded Canvas
-        st.markdown("<br><h3 style='text-align:center; color:#721c24; font-family:Georgia;'>📈 Live Performance Analytics Index</h3>", unsafe_allow_html=True)
-        
-        chart_html = f"""
-        <html>
-        <head>
-            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-            <style>
-                body {{ background-color: #faf8f5; font-family: sans-serif; padding: 10px; }}
-                .chart-box {{ background: white; border: 1px solid #e3dcd3; border-radius: 12px; padding: 20px; margin-bottom: 25px; box-shadow: 0 4px 10px rgba(0,0,0,0.02); }}
-                h4 {{ margin-top: 0; color: #721c24; text-align: center; border-bottom: 1px dashed #e3dcd3; padding-bottom: 8px; }}
-                .grid-2 {{ display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }}
-                @media(max-width: 600px) {{ .grid-2 {{ grid-template-columns: 1fr; }} }}
-            </style>
-        </head>
-        <body>
-            <!-- Line Chart (Full Width) -->
-            <div class="chart-box">
-                <h4>📈 Monthly Marks Trend</h4>
-                <canvas id="lineChart" height="120"></canvas>
-            </div>
-
-            <div class="grid-2">
-                <!-- Bar Chart -->
-                <div class="chart-box">
-                    <h4>📊 Subject-wise Scores</h4>
-                    <canvas id="barChart"></canvas>
-                </div>
-                <!-- Radar Chart -->
-                <div class="chart-box">
-                    <h4>🕸️ Skill Analysis</h4>
-                    <canvas id="radarChart"></canvas>
-                </div>
-            </div>
-
-            <div class="grid-2">
-                <!-- Pie Chart -->
-                <div class="chart-box">
-                    <h4>🍕 Grade Distribution</h4>
-                    <canvas id="pieChart"></canvas>
-                </div>
-                <!-- Donut Chart -->
-                <div class="chart-box">
-                    <h4>🍩 Attendance Matrix</h4>
-                    <canvas id="donutChart"></canvas>
-                </div>
-            </div>
-
-            <script>
-                const options = {{
-                    responsive: true,
-                    animation: {{ duration: 2000, easing: 'easeOutQuart' }},
-                    plugins: {{ legend: {{ labels: {{ color: '#5c4541' }} }} }}
-                }};
-                
-                // Colors matched to Burgundy & Gold Theme
-                const colors = ['#721c24', '#d4af37', '#a93226', '#e8c595', '#5c4541'];
-
-                // 1. Line Chart
-                new Chart(document.getElementById('lineChart'), {{
-                    type: 'line',
-                    data: {{
-                        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
-                        datasets: [{{ label: 'Performance Progress', data: [65, 72, 68, 79, 83, {prediction}], borderColor: '#721c24', tension: 0.3, fill: false }}]
-                    }},
-                    options: options
-                }});
-
-                // 2. Bar Chart
-                new Chart(document.getElementById('barChart'), {{
-                    type: 'bar',
-                    data: {{
-                        labels: ['Math', 'Science', 'English', 'History'],
-                        datasets: [{{ label: 'Score', data: [{previous_scores}, 82, 88, 74], backgroundColor: colors }}]
-                    }},
-                    options: options
-                }});
-
-                // 3. Radar Chart
-                new Chart(document.getElementById('radarChart'), {{
-                    type: 'radar',
-                    data: {{
-                        labels: ['Logic', 'Retention', 'Focus', 'Consistency', 'Participation'],
-                        datasets: [{{ label: 'Current Standing', data: [80, 75, {hours_studied * 8}, {attendance_percent}, 85], backgroundColor: 'rgba(212, 175, 55, 0.2)', borderColor: '#d4af37' }}]
-                    }},
-                    options: options
-                }});
-
-                // 4. Pie Chart
-                new Chart(document.getElementById('pieChart'), {{
-                    type: 'pie',
-                    data: {{
-                        labels: ['Grade A', 'Grade B', 'Grade C'],
-                        datasets: [{{ data: [40, 35, 25], backgroundColor: colors.slice(0,3) }}]
-                    }},
-                    options: options
-                }});
-
-                // 5. Donut Chart
-                new Chart(document.getElementById('donutChart'), {{
-                    type: 'doughnut',
-                    data: {{
-                        labels: ['Present (%)', 'Absent (%)'],
-                        datasets: [{{ data: [{attendance_percent}, {100 - attendance_percent}], backgroundColor: ['#721c24', '#e3dcd3'] }}]
-                    }},
-                    options: options
-                }});
-            </script>
-        </body>
-        </html>
-        """
-        components.html(chart_html, height=900, scrolling=True)
-
-    except Exception as e:
-        st.error(f"Something went wrong with the entry evaluation: {e}")
